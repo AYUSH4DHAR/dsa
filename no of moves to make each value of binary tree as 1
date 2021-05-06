@@ -1,0 +1,20 @@
+class Solution {
+    public int distributeCoins(TreeNode root) {
+        return util(root,null);
+    }
+    
+    public int util(TreeNode node,TreeNode parent){
+        if(node==null){
+            return 0;
+        }
+        int movesLeft = util(node.left,node);
+        int movesRight = util(node.right,node);
+        if(parent!=null && node.val!=1){
+            //we are borrowing coins from parent to make this node's coins to be 1
+			//think of it this way -> something (could be negative due to children borrowing coins) + node.val = 1, something = 1 - node.val
+			//parent.val = parent.val - something  ==>  parent.val - (1 - node.val) 
+            parent.val =  parent.val + node.val - 1;
+        }
+        return movesLeft + movesRight + Math.abs(1 - node.val);
+    }
+}
