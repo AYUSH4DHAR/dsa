@@ -11,7 +11,7 @@ public:
             { 
                     // increment count of Left bracket 
                     countLeft++;  
-                    if(imbalance > 0)  
+                    if(imbalance > 0)  *********************************************
                     { 
                         // swaps count is last swap count + total  
                         // number imbalanced brackets 
