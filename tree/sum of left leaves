@@ -1,8 +1,23 @@
- boolean isLeaf(Node node)
-    {
-        if (node == null)
-            return false;
-        if (node.left == null && node.right == null)
+ */
+class Solution {
+    int sum=0;
+    boolean isleaf(TreeNode root){
+        if(root.left==null && root.right==null)
             return true;
         return false;
     }
+    public int sumOfLeftLeaves(TreeNode root) {
+        trav(root);
+        return sum;
+    }
+    void trav(TreeNode root){
+        if(root.left!=null && isleaf(root.left)){
+            sum+=root.left.val;
+        }
+            
+        if(root.left!=null)
+            trav(root.left);
+        if(root.right!=null)
+            trav(root.right);
+    }
+}
