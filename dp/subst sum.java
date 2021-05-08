@@ -1,27 +1,29 @@
-static boolean isSubsetSum(int set[],
-                               int n, int sum)
+  static boolean equal_sum(int a[],int that_value,int n)
     {
-        // The value of subset[i][j] will be
-        // true if there is a subset of
-        // set[0..j-1] with sum equal to i
-        boolean subset[][] = new boolean[sum + 1][n + 1];
- 
-        // If sum is 0, then answer is true
-        for (int i = 0; i <= n; i++)
-            subset[0][i] = true;
- 
-        // If sum is not 0 and set is empty,
-        // then answer is false
-        for (int i = 1; i <= sum; i++)
-            subset[i][0] = false;
- 
-        // Fill the subset table in botton
-        // up manner
-        for (int i = 1; i <= sum; i++) {
-            for (int j = 1; j <= n; j++) {
-                subset[i][j] = subset[i][j - 1];
-                if (i >= set[j - 1])
-                    subset[i][j] = subset[i][j]
-                                   || subset[i - set[j - 1]][j - 1];
+        boolean t[][]=new boolean[n+1][that_value+1];
+        
+        for(int i=0;i<=n;i++)
+        {
+            t[i][0]=true;
+        }
+        
+        for(int i=1;i<=that_value;i++)
+        {
+            t[0][i]=false;
+        }
+        
+        for(int i=1;i<=n;i++)
+        {
+            for(int j=1;j<=that_value;j++)
+            {
+                if(a[i-1]>j)
+                {
+                    t[i][j]=t[i-1][j];
+                }
+                else if(a[i-1]<=j)
+                {
+                    t[i][j]=(t[i-1][j-a[i-1]] || t[i-1][j]);
+                }
             }
         }
+        
