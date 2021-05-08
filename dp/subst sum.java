@@ -16,7 +16,7 @@
         {
             for(int j=1;j<=that_value;j++)
             {
-                if(a[i-1]>j)
+                if(a[i-1]>j)// if subset sum was true for i-1th pRT OF Array then in will be for i also 
                 {
                     t[i][j]=t[i-1][j];
                 }
