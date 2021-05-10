@@ -1,0 +1,10 @@
+subset1sum + subset2sum = total sum
+sumbsetsum1 - subsetsum2 = fiff
+addign both =ns
+2*subset1sum = totalsum + differnec
+subset1sum = (ts+diff)/2;
+
+
+
+
+countsubsetsum(sum=subset1sum , sumarray[]);
