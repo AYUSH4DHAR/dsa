@@ -1,43 +1,61 @@
-class Solution {
-    public ListNode sortList(ListNode head) {
-        //Using priority queue ; O(nlogn) time and O(N) space 
-        // OR : using merge sort O(nlogn) time, and almost constant space ; 
-        if(head == null || head.next == null) return head ; 
-        ListNode mid = getMid(head) ; 
-        ListNode left = sortList(head) ;
-        ListNode right = sortList(mid);
-        return merge(left , right); 
-        
+ static Node mergeSort(Node head)
+    {
+        if (head.next == null)
+            return head;
+ 
+        Node mid = findMid(head);
+        Node head2 = mid.next;
+        mid.next = null;
+        Node newHead1 = mergeSort(head);
+        Node newHead2 = mergeSort(head2);
+        Node finalHead = merge(newHead1, newHead2);
+ 
+        return finalHead;
     }
-    
-    ListNode merge(ListNode left , ListNode right){
-        ListNode merged =new ListNode() ; 
-        ListNode head2= merged ; 
-        while(left!= null && right != null){
-            if(left.val <= right.val){  // '<=' to maintain stability
-                head2.next = left ; 
-                left = left.next ; 
-                head2=head2.next ; 
+ 
+    // Function to merge two linked lists
+    static Node merge(Node head1, Node head2)
+    {
+        Node merged = new Node(-1);
+        Node temp = merged;
+       
+        // While head1 is not null and head2
+        // is not null
+        while (head1 != null && head2 != null) {
+            if (head1.data < head2.data) {
+                temp.next = head1;
+                head1 = head1.next;
             }
             else {
-                head2.next = right; 
-                right = right.next ; 
-                head2=head2.next ;
+                temp.next = head2;
+                head2 = head2.next;
             }
+            temp = temp.next;
         }
-        head2.next = left != null ? left : right ; 
-        return merged.next ; 
-    }
-    
-    ListNode getMid(ListNode head){
-        ListNode slow = null ; 
-        ListNode fast = head ; 
-        while(fast != null && fast.next !=null){
-            slow = (slow == null )? fast : slow.next ; 
-            fast = fast.next.next ; 
+       
+        // While head1 is not null
+        while (head1 != null) {
+            temp.next = head1;
+            head1 = head1.next;
+            temp = temp.next;
         }
-        ListNode mid = slow.next ; 
-        slow.next = null ;  // to split the lists 
-        return mid ; 
+       
+        // While head2 is not null
+        while (head2 != null) {
+            temp.next = head2;
+            head2 = head2.next;
+            temp = temp.next;
+        }
+        return merged.next;
     }
-}
+ 
+    // Find mid using The Tortoise and The Hare approach
+    static Node findMid(Node head)
+    {
+        Node slow = head, fast = head.next;
+        while (fast != null && fast.next != null) {
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+        return slow;
+    }
