@@ -1,0 +1,3 @@
+int n = lcs(s,reverse(s))
+ int m= s.length();
+ return m-n;
