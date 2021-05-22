@@ -37,3 +37,25 @@ public List<List<Integer>> levelOrder(TreeNode root) {
         }
         return wrapList;
     }
+
+********************************
+void printLevelOrder()
+    {
+        int h = height(root);
+        int i;
+        for (i=1; i<=h; i++)
+            printCurrentLevel(root, i);
+    }
+ void printCurrentLevel (Node root ,int level)
+    {
+        if (root == null)
+            return;
+        if (level == 1)
+            System.out.print(root.data + " ");
+        else if (level > 1)
+        {
+            printCurrentLevel(root.left, level-1);
+            printCurrentLevel(root.right, level-1);
+        }
+    }
+     
