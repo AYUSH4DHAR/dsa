@@ -34,3 +34,37 @@ maint(){
     else
         System.out.println(v.get(v.size() - 1 - k));
 }
+////////////////////////////////////////////
+static int k;
+  
+// recursive function to calculate Kth ancestor
+static Node kthAncestorDFS(Node root, int node )
+{ 
+    // Base case
+    if (root == null)
+        return null;
+      
+    if (root.data == node||
+    (temp = kthAncestorDFS(root.left,node)) != null ||
+    (temp = kthAncestorDFS(root.right,node)) != null)
+    { 
+        if (k > 0)     
+            k--;
+          
+        else if (k == 0)
+        {
+            // print the kth ancestor
+            System.out.print("Kth ancestor is: "+root.data);
+              
+            // return null to stop further backtracking
+            return null;
+        }
+          
+        // return current node to previous call
+        return root;
+    }
+    return null;
+} 
+
+
+
