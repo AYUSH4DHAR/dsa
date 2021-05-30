@@ -10,3 +10,6 @@ If you have accessor methods:
 Comparator.comparing(Person::getFirstName)
           .thenComparing(Person::getLastName)
           .thenComparingInt(Person::getAge);
+
+
+  Arrays.sort(arr,Comparator.comparing((Job j)->j.profit).thenComparing(j->j.deadline).reversed());
