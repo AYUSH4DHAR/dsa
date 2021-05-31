@@ -1,59 +1,97 @@
-static boolean isSafe(boolean[][] graph, int[] color)
-  {
-    // check for every edge
-    for (int i = 0; i < V; i++)
-      for (int j = i + 1; j < V; j++)
-        if (graph[i][j] && color[j] == color[i])
-          return false;
-    return true;
-  }
+final int V = 4;
+    int color[];
  
-  
-  static boolean graphColoring(boolean[][] graph, int m,
-                               int i, int[] color)
-  {
-    // if current index reached end
-    if (i == V) {
+    /* A utility function to check
+       if the current color assignment
+       is safe for vertex v */
+    boolean isSafe(
+        int v, int graph[][], int color[],
+        int c)
+    {
+        for (int i = 0; i < V; i++)
+            if (
+                graph[v][i] == 1 && c == color[i])
+                return false;
+        return true;
+    }
  
-      // if coloring is safe
-      if (isSafe(graph, color))
-      {
+    /* A recursive utility function
+       to solve m coloring  problem */
+    boolean graphColoringUtil(
+        int graph[][], int m,
+        int color[], int v)
+    {
+        /* base case: If all vertices are
+           assigned a color then return true */
+        if (v == V)
+            return true;
+ 
+        /* Consider this vertex v and try
+           different colors */
+        for (int c = 1; c <= m; c++)
+        {
+            /* Check if assignment of color c to v
+               is fine*/
+            if (isSafe(v, graph, color, c))
+            {
+                color[v] = c;
+ 
+                /* recur to assign colors to rest
+                   of the vertices */
+                if (
+                    graphColoringUtil(
+                        graph, m,
+                        color, v + 1))
+                    return true;
+ 
+                /* If assigning color c doesn't lead
+                   to a solution then remove it */
+                color[v] = 0;
+            }
+        }
+ 
+        /* If no color can be assigned to
+           this vertex then return false */
+        return false;
+    }
+ 
+   
+    boolean graphColoring(int graph[][], int m)
+    {
+        // Initialize all color values as 0. This
+        // initialization is needed correct
+        // functioning of isSafe()
+        color = new int[V];
+        for (int i = 0; i < V; i++)
+            color[i] = 0;
+ 
+        // Call graphColoringUtil() for vertex 0
+        if (
+            !graphColoringUtil(
+                graph, m, color, 0))
+        {
+            System.out.println(
+                "Solution does not exist");
+            return false;
+        }
  
         // Print the solution
         printSolution(color);
         return true;
-      }
-      return false;
     }
  
-    // Assign each color from 1 to m
-    for (int j = 1; j <= m; j++)
+    /* A utility function to print solution */
+  
+ 
+    // driver program to test above function
+    public static void main(String args[])
     {
-      color[i] = j;
- 
-      // Recur of the rest vertices
-      if (graphColoring(graph, m, i + 1, color))
-        return true;
-      color[i] = 0;
-    }
-    return false;
-  }
-  boolean[][] graph = {
-      { false, true, true, true },
-      { true, false, true, false },
-      { true, true, false, true },
-      { true, false, true, false },
-    };
-    int m = 3; // Number of colors
- 
-    // Initialize all color values as 0.
-    // This initialization is needed
-    // correct functioning of isSafe()
-    int[] color = new int[V];
-    for (int i = 0; i < V; i++)
-      color[i] = 0;
-    if (!graphColoring(graph, m, 0, color))
-      System.out.println("Solution does not exist");
-  }
-}
-// This code is contributed
+       
+        int graph[][] = {
+            { 0, 1, 1, 1 },
+            { 1, 0, 1, 0 },
+            { 1, 1, 0, 1 },
+            { 1, 0, 1, 0 },
+        };
+        int m = 3; // Number of colors
+        Coloring.graphColoring(graph, m);
