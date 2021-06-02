@@ -1,67 +1,47 @@
 public void setZeroes(int[][] matrix) {
-    if(matrix==null || matrix.length==0){
-        return;
-    }
-    
-    boolean setFirstRowToZeroes = false;
-    boolean setFirstColumnToZeroes = false;
-    
-    //check if first column needs to be set to zero
-    for(int row=0;row<matrix.length;row++){
-        if(matrix[row][0] == 0){
-            setFirstColumnToZeroes=true;
-            break;
+    Boolean isCol = false;
+    int R = matrix.length;
+    int C = matrix[0].length;
+
+    for (int i = 0; i < R; i++) {
+
+      // Since first cell for both first row and first column is the same i.e. matrix[0][0]
+      // We can use an additional variable for either the first row/column.
+      // For this solution we are using an additional variable for the first column
+      // and using matrix[0][0] for the first row.
+      if (matrix[i][0] == 0) {
+        isCol = true;
+      }
+
+      for (int j = 1; j < C; j++) {
+        // If an element is zero, we set the first element of the corresponding row and column to 0
+        if (matrix[i][j] == 0) {
+          matrix[0][j] = 0;
+          matrix[i][0] = 0;
         }
+      }
     }
-    
-    //check if first row needs to be set to zero
-    for(int col=0;col<matrix[0].length;col++){
-        if(matrix[0][col] == 0){
-            setFirstRowToZeroes=true;
-            break;
+
+    // Iterate over the array once again and using the first row and first column, update the elements.
+    for (int i = 1; i < R; i++) {
+      for (int j = 1; j < C; j++) {
+        if (matrix[i][0] == 0 || matrix[0][j] == 0) {
+          matrix[i][j] = 0;
         }
+      }
     }
-    
-    //mark columns and rows to be set to zero
-    for(int row=1;row<matrix.length;row++){
-        for(int col=1;col<matrix[0].length;col++){
-            if(matrix[row][col]==0){
-                matrix[row][0]=0;
-                matrix[0][col]=0;
-            }
-        }
+
+    // See if the first row needs to be set to zero as well
+    if (matrix[0][0] == 0) {
+      for (int j = 0; j < C; j++) {
+        matrix[0][j] = 0;
+      }
     }
-    
-    // make rows zero
-    for(int row=1;row<matrix.length;row++){
-        if(matrix[row][0]==0){
-            for(int col=1;col<matrix[0].length;col++){
-                matrix[row][col]=0;
-            }
-        }
+
+    // See if the first column needs to be set to zero as well
+    if (isCol) {
+      for (int i = 0; i < R; i++) {
+        matrix[i][0] = 0;
+      }
     }
-    
-    // make columns zero
-    for(int col=1;col<matrix[0].length;col++){
-        if(matrix[0][col]==0){
-            for(int row=1;row<matrix.length;row++){
-                matrix[row][col]=0;
-            }
-        }
-    }
-    
-    // zero out first row (if needed)
-    if(setFirstRowToZeroes){
-        for(int col=0;col<matrix[0].length;col++){
-            matrix[0][col]=0;
-        }
-    }
-    
-    // zero out first column (if needed)
-    if(setFirstColumnToZeroes){
-        for(int row=0;row<matrix.length;row++){
-            matrix[row][0]=0;
-        }
-    }
-    
-}
+  }
