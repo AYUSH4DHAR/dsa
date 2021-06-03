@@ -37,3 +37,30 @@ public boolean searchMatrix(int[][] matrix, int target) {
             
             return false;
         }
+
+
+
+
+******************************************
+class Solution {
+  public boolean searchMatrix(int[][] matrix, int target) {
+            int i = 0, j = matrix[0].length - 1;
+            while (i < matrix.length ) {
+                    if (matrix[i][j] == target) {
+                        return true;
+                    } else if (matrix[i][j] < target) {
+                        i++;
+                    } else {
+                        break;
+                    }
+                }
+            if(i>=matrix.length)
+          return false;
+       int x =Arrays.binarySearch(matrix[i],target);
+         
+
+      if(x>=0)
+              return true;
+            return false;
+        }
+}
