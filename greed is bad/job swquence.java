@@ -1,11 +1,19 @@
 class Solution
 {
     //Function to find the maximum profit and the number of jobs done.
+	 public Job(char id, int deadline, int profit)
+    {
+        this.id = id;
+        this.deadline = deadline;
+        this.profit = profit;
+    }
     int[] JobScheduling(Job arr[], int n)
     {
         //sorting all jobs according to decreasing order of profit.
        // Arrays.sort(arr, new jobComparator());
           Arrays.sort(arr,Comparator.comparing((Job j)->j.profit).thenComparing(j->j.deadline).reversed());*************************************************
+// 		    Collections.sort(arr,
+//                          (a, b) -> b.profit - a.profit);*******************************************************
 
         int res=0, count=0;
         //array to store result (Sequence of jobs).
