@@ -9,3 +9,6 @@ Below are the steps for finding MST using Kruskal’s algorithm
 
 prims
 https://www.geeksforgeeks.org/prims-minimum-spanning-tree-mst-greedy-algo-5/
+
+take edge with smallest weight
+keep taking min weight edges adjacent to end nodes of spanning tree we are constructiong
