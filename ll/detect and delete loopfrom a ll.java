@@ -22,6 +22,9 @@
             fast = fast.next.next;
         }
  
+  *********************************************************************************************************************
+   find the size of loop , put slow at head and fst at k nodes ahead of slow and start the while loop in aS SHOWN BELOW
+  *********************************************************************************************************************
         /* If loop exists */
         if (slow == fast) {
             slow = node;
