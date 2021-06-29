@@ -64,24 +64,7 @@ is detailed Kosaraju’s algorithm.
     }
 
 
-    void fillOrder(int v, boolean visited[], Stack stack)
-    {
-        // Mark the current node as visited and print it
-        visited[v] = true;
   
-        // Recur for all the vertices adjacent to this vertex
-        Iterator<Integer> i = adj[v].iterator();
-        while (i.hasNext())
-        {
-            int n = i.next();
-            if(!visited[n])
-                fillOrder(n, visited, stack);
-        }
-  
-        // All vertices reachable from v are processed by now,
-        // push v to Stack
-        stack.push(new Integer(v));
-    }
 
 
  Graph getTranspose()
