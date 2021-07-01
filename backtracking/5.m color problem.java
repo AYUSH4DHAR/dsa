@@ -95,3 +95,14 @@ final int V = 4;
         };
         int m = 3; // Number of colors
         Coloring.graphColoring(graph, m);
+        
+        
+        Method 3:  Using BFS
+
+The approach here is to color each node from 1 to n initially by color 1. And start travelling BFS from an unvisited starting node to cover all connected components in one go. On reaching each node during BFS traversal, do the following:
+
+Check all edges of the given node.
+For each vertex connected to our node via an edge:
+check if the color of the nodes is the same. If same, increase the color of the other node (not the current) by one.
+check if it visited or unvisited. If not visited, mark it as visited and push it in a queue.
+Check condition for maxColors till now. If it exceeds M, return false
