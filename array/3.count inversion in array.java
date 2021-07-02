@@ -1,3 +1,9 @@
+********************************
+naive in n2
+*******************************
+
+
+
 private static int mergeAndCount(int[] arr, int l,
                                      int m, int r)
     {
