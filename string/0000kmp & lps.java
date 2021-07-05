@@ -1,36 +1,37 @@
-   void lps(String s,int[] lps) {
-        // code here
-        // int[] arr = new int[s.length()];
-       int n = s.length();
-        
-        
-        lps[0] = 0;
-        
-        int i = 0, j = 1;
-        while(j < n)
-        {
-            if(s.charAt(i) == s.charAt(j))
-            {
-                lps[j] = i + 1;
+    void computeLPSArray(String pat, int M, int lps[])
+    {
+        // length of the previous longest prefix suffix
+        int len = 0;
+        int i = 1;
+        lps[0] = 0; // lps[0] is always 0
+  
+        // the loop calculates lps[i] for i = 1 to M-1
+        while (i < M) {
+            if (pat.charAt(i) == pat.charAt(len)) {
+                len++;
+                lps[i] = len;
                 i++;
-                j++;
-            } 
-            else
+            }
+            else // (pat[i] != pat[len])
             {
-                if(i == 0)
+                // This is tricky. Consider the example.
+                // AAACAAAA and i = 7. The idea is similar
+                // to search step.
+                if (len != 0) {
+                    len = lps[len - 1];
+  
+                    // Also, note that we do not increment
+                    // i here
+                }
+                else // if (len == 0)
                 {
-                    lps[j] = 0;
-                    j++;
-                } 
-                else
-                {
-                    i = lps[i - 1];
+                    lps[i] = len;
+                    i++;
                 }
             }
         }
-        
-       
     }
+  
  void KMPSearch(String pat, String txt)
     {
         int M = pat.length();
