@@ -31,3 +31,35 @@ class Solution {
         }
     }
 }
+  Node bToDLL(Node root)
+    {
+	//  Your code here	
+	Node prev = null;
+	Node head = null;
+	Stack<Node>  s = new Stack<>();
+	Node curr  = root;
+	while(curr!=null || !s.isEmpty()){
+	    while(curr !=null)
+	    {
+	        s.push(curr);
+	        curr = curr.left;
+	    }
+	    curr = s.pop();
+	    if(head==null)
+	     head = curr;
+	     
+	    if(prev==null)
+	     prev = curr;
+	    else
+	    {
+	        prev.right = curr;
+	        curr.left = prev;
+	        prev = curr;
+	    }
+	     
+	     curr = curr.right;
+	    
+	}
+	return head;
+    }
+}
