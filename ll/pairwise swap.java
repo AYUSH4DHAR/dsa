@@ -28,3 +28,21 @@ lass Solution {
         return head;
     }
 }
+
+****************
+    public ListNode swapPairs(ListNode head) {
+       
+          ListNode cn = head;
+          ListNode b=null, c=null;
+          if(cn==null || cn.next==null)
+             return cn;
+           if(cn.next!=null){
+         
+             b = cn.next;
+             c = b.next;
+             b.next = cn;
+             cn.next = swapPairs(c);
+        }
+        
+        return b;
+    }
