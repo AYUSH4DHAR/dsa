@@ -6,7 +6,7 @@ class Solution {
     helper(res, each, 0, nums);
     return res;
 }
-public void helper(List<List<Integer>> res, List<Integer> each, int pos, int[] n) {
+public void helper(List<List<Integer>> res, List<Integer> each, int pos, int[] n) { //no duplicate
     if (pos <= n.length) {
         res.add(each);
     }
@@ -20,6 +20,15 @@ public void helper(List<List<Integer>> res, List<Integer> each, int pos, int[] n
     }
     return;
 }
+}
+
+private void backtrack(List<List<Integer>> list , List<Integer> tempList, int [] nums, int start){  //duplicates allowed
+    list.add(new ArrayList<>(tempList));
+    for(int i = start; i < nums.length; i++){
+        tempList.add(nums[i]);
+        backtrack(list, tempList, nums, i + 1);
+        tempList.remove(tempList.size() - 1);
+    }
 }
 ****************************************************
  public static void main(String[] args)
